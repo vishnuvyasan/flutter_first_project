@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
+import './question.dart';
 
 void main() => runApp(FirstWidget());
 
-class FirstWidget extends StatelessWidget {
-  void isMarried() {
+class FirstWidget extends StatefulWidget {
+  @override
+  _FirstWidgetState createState() => _FirstWidgetState();
+}
+
+class _FirstWidgetState extends State<FirstWidget> {
+  var _questionIndex = 0;
+
+  void _isMarried() {
     print("Congratulations");
+
+    setState(() {
+      _questionIndex = _questionIndex + 1;
+    });
   }
 
-  void isNotMarried() {
+  void _isNotMarried() {
     print("go get married");
+    setState(() {
+      _questionIndex = _questionIndex + 1;
+    });
   }
 
   @override
@@ -22,13 +37,13 @@ class FirstWidget extends StatelessWidget {
         ),
         body: Column(
           children: <Widget>[
-            Text(questions[0]),
+            QuestionWidget(questions[_questionIndex]),
             RaisedButton(
-              onPressed: isMarried,
+              onPressed: _isMarried,
               child: Text("Yes"),
             ),
             RaisedButton(
-              onPressed: isNotMarried,
+              onPressed: _isNotMarried,
               child: Text("No"),
             ),
           ],
